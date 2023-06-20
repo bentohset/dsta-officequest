@@ -40,7 +40,7 @@ export default function LoginScreen({ navigation }) {
                         <Text style={styles.bigText}>In</Text>
                     </View>
                 </View>
-                <View style={{height: '70%', width:'100%', alignItems:'center', justifyContent:'start', paddingTop: 0}}>
+                <View style={{height: '70%', width:'100%', alignItems:'center', justifyContent:'flex-start', paddingTop: 0}}>
                     <LongInput label="Email" placeholder="example@mail.com" value={loginDetails.email} onChangeText={(email) => setLoginDetails({...loginDetails, email: email})} />
                     <LongInput label="Password" placeholder="......."  value={loginDetails.password}  onChangeText={(password) => setLoginDetails({...loginDetails, password: password})} password={true} />
                 

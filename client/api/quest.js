@@ -8,7 +8,7 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3001`;
 /*
 Creates Quest
 @Params: title, description, type, points, startDate (not required), endDate(not required)
-@return: Quest object
+@return: { data: Quest object, message: string, error: boolean }
 */
 export const createQuest = async (
     title,
@@ -35,11 +35,22 @@ export const createQuest = async (
             }),
         });
         if (response.status === 400) {
-            throw new Error('No title/ points given');
+            return {
+                error: true,
+                message: 'Please provide a title/ desc/ type/ points',
+            };
         }
-        const data = await response.json();
-        //console.log(data)
-        return data;
+        if (response.status === 401) {
+            return { error: true, message: 'Type must be qr/quiz/daily' };
+        }
+        if (response.status === 500) {
+            return { error: true, message: 'Server is down' };
+        }
+        if (response.status === 200) {
+            const data = await response.json();
+            //console.log(data)
+            return { error: false, message: 'Success', data };
+        }
     } catch (error) {
         console.log(error);
     }
@@ -47,7 +58,7 @@ export const createQuest = async (
 
 /*
 Get all quests
-@return: Array of Quest objects
+@return: { data: Array of Quest objects, message: string, error: boolean }
 */
 export const getQuests = async () => {
     try {
@@ -58,9 +69,14 @@ export const getQuests = async () => {
                 'Content-Type': 'application/json',
             },
         });
-        const data = await response.json();
-        //console.log(data)
-        return data;
+        if (response.status === 500) {
+            return { error: true, message: 'Server is down' };
+        }
+        if (response.status === 200) {
+            const data = await response.json();
+            //console.log(data)
+            return { error: false, message: 'Success', data };
+        }
     } catch (error) {
         console.log(error);
     }
@@ -69,7 +85,7 @@ export const getQuests = async () => {
 export const resetQuests = async (userId) => {
     try {
         const url = `${uri}/quests/resetquests`;
-        console.log(userId)
+        console.log(userId);
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -77,12 +93,12 @@ export const resetQuests = async (userId) => {
             },
             body: JSON.stringify({
                 userId: userId,
-            })
+            }),
         });
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         return data;
     } catch (error) {
         console.log(error);
     }
-}
+};

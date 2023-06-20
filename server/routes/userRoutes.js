@@ -9,6 +9,8 @@ const {
     completeQuest,
     getUserPals,
     completeQuiz,
+    claimPrize,
+    getPrizeClaimed,
 } = require('../controller/userController');
 
 const router = express.Router();
@@ -29,6 +31,10 @@ router.get('/:id/quests', getQuests);
 
 router.patch('/:userId/quests/:questId', completeQuest);
 
-router.patch('/completequiz', completeQuiz)
+router.patch('/completequiz', completeQuiz);
+
+router.patch('/:id/claim-prize', claimPrize);
+
+router.get('/:id/prize-claimed', getPrizeClaimed);
 
 module.exports = router;

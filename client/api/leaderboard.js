@@ -8,7 +8,8 @@ const uri = `http://${manifest.debuggerHost.split(':').shift()}:3001`;
 
 /*
 Get leaderboard
-@return: Array of User objects with _id, username and points fields in order of descending points
+@return: { data: Array of User objects with _id, username and points fields in order of descending points, 
+    error: boolean, message: string } 
 */
 export const getLeaderboard = async () => {
     try {
@@ -19,9 +20,13 @@ export const getLeaderboard = async () => {
                 'Content-Type': 'application/json',
             },
         });
-        const data = await response.json();
-        //console.log(data)
-        return data;
+        if (response.status === 500) {
+            return { error: true, message: 'Server is down' };
+        }
+        if (response.status === 200) {
+            const data = await response.json();
+            return { error: false, message: 'Success', data };
+        }
     } catch (error) {
         console.log(error);
     }

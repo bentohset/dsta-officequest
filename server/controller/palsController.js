@@ -5,7 +5,7 @@ const generatePal = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         if (!user) {
-            res.status(404).json({ message: 'User not found!' });
+            res.status(400).json({ message: 'User not found!' });
             return;
         }
         const randomNumber = Math.random();
@@ -44,30 +44,36 @@ const sendPal = async (req, res) => {
         const { username, palNumber } = req.body;
         const user = await User.findById(req.params.userId);
         if (!user) {
-            res.status(404).json({ message: 'User not found!' });
+            res.status(400).json({ message: 'User not found!' });
             return;
         }
         const receiverArray = await User.find({ username: username });
         const receiver = receiverArray[0];
         if (!receiver) {
-            res.status(405).json({ message: 'Friend not found!' });
+            res.status(401).json({ message: 'Friend not found!' });
             return;
         }
         if (palNumber > 9) {
-            res.status(400).json({ message: 'Pal out of index!' });
+            res.status(404).json({ message: 'Pal out of index!' });
             return;
         }
         if (user.palsCount[palNumber] < 1) {
-            res.status(401).json({
+            res.status(405).json({
                 message: 'User does not have pal to send!',
+            });
+            return;
+        }
+        if (user.username === username) {
+            res.status(406).json({
+                message: 'Cannot send to yourself!',
             });
             return;
         }
         user.palsCount[palNumber] -= 1;
         receiver.palsCount[palNumber] += 1;
-        await user.save();
+        updatedUser = await user.save();
         await receiver.save();
-        res.status(200).json(user);
+        res.status(200).json(updatedUser);
     } catch (error) {
         res.status(500).json({ message: error });
     }

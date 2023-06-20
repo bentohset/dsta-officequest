@@ -74,7 +74,7 @@ export default function LeaderboardScreen({ navigation }) {
                 </View>
             </View>
             <View style={styles.bottomNavigation}>
-                <BottomNavigator navigation={navigation} />
+                {/* <BottomNavigator navigation={navigation} /> */}
             </View>
         </View>
 

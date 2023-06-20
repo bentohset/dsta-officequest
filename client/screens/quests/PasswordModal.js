@@ -62,7 +62,7 @@ const PasswordModal = ({ route }) => {
                     <LongInput label="Password" value={password} onChangeText={(ans)=>setPassword(ans)}/>
                 </View>
                 <View style={{ justifyContent:'center', alignItems:'center'}}>
-                    <Text style={{color:'gray'}}>Scan the QR Code to get you unique one-time password!</Text>
+                    <Text style={{color:'gray'}}>Scan the QR Code to get your unique one-time password!</Text>
                 </View>
                 {error && 
                 <View style={{ justifyContent:'center', alignItems:'center', color:'red'}}>

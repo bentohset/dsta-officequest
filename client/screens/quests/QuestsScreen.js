@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Alert, FlatList, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getQuests } from '../../api/quest';
 import { completeQuest } from '../../api/user';
-import BottomNavigator from '../../components/BottomNavigation';
 import useAuth from '../../hooks/useAuth';
 
 export default function QuestsScreen({ navigation }) {
@@ -17,7 +16,7 @@ export default function QuestsScreen({ navigation }) {
         const fetchData = async () => {
             try {
                 const data = await getQuests()
-                setQuests(data)
+                setQuests(data.data)
             } catch (error) {
                 console.log(error)
             }
@@ -159,12 +158,13 @@ export default function QuestsScreen({ navigation }) {
             }
             if (type === "daily" &&  !isComplete) {
                 text = "Click to login!"
+                state = "Ongoing"
             }
 
             return (
                 <View>
                     <Text style={{ color: 'gray'}}>{text}</Text>
-                    <View style={{ marginTop: 4, borderRadius: 10, backgroundColor: '#D9D9D9', padding: 4, width:'30%', justifyContent:'center', alignItems:'center'}}>
+                    <View style={{ marginTop: 4, borderRadius: 10, backgroundColor: '#D9D9D9', padding: 4, width:'35%', justifyContent:'center', alignItems:'center'}}>
                         <Text style={{ color: 'gray'}}>{state}</Text>
                     </View>
                 </View>
@@ -222,7 +222,7 @@ export default function QuestsScreen({ navigation }) {
                 </View>
 
                 <View style={styles.bottomNavigation}>
-                    <BottomNavigator navigation={navigation} />
+                    {/* <BottomNavigator navigation={navigation} /> */}
                 </View>
             </View>
         </View>
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     },
     bottomNavigation: {
         width:'100%',
-        height: 90
+        height: 70
 
     },
     defaultCard:{

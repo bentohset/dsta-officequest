@@ -6,7 +6,7 @@ import LongInput from '../../components/LongInput';
 import BackButton from '../../components/BackButton';
 import { resetQuests } from '../../api/quest';
 import { generatePal } from '../../api/pals';
-import PrizeModal from '../../components/PrizeModal';
+import RollModal from '../../components/RollModal';
 
 // eslint-disable-next-line no-unused-vars
 const SettingScreen = ({ navigation }) => {
@@ -41,7 +41,7 @@ const SettingScreen = ({ navigation }) => {
         console.log("roll")
         
         const res = await generatePal(userId)
-        setPrize(res)
+        setPrize(res.data)
         setShowModal(true)
     }
 
@@ -55,11 +55,11 @@ const SettingScreen = ({ navigation }) => {
             </View>
             <View style={{ width:'100%', alignItems:'start', marginTop:10, gap:5}}>
                 <Text style={styles.mediumText}>Profile</Text>
-                <View style={{ width:'90%', alignSelf:'center', gap:5}}>
+                {user && <View style={{ width:'90%', alignSelf:'center', gap:5}}>
                     <Text style={styles.bodyText}>Username: {user.username}</Text>
                     <Text style={styles.bodyText}>Email: {user.email}</Text>
                     <Text style={styles.bodyText}>UserID: {user._id}</Text>
-                </View>
+                </View>}
             </View>
             <LongInput 
                 label="Change Username" 
@@ -74,7 +74,7 @@ const SettingScreen = ({ navigation }) => {
             <LongButton text="Roll Gacha" onPress={()=>{handleRoll(user._id)}}/>
 
             <LongButton text="Logout" textColor="white" color="#FD5B61" onPress={()=>{handleLogout()}}/>
-            <PrizeModal visible={showModal} closeModal={toggleModal} prize={prize} prizeType="gacha"/>
+            <RollModal visible={showModal} closeModal={toggleModal} prize={prize} prizeType="gacha"/>
         </View>
     )
 }

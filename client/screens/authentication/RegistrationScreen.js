@@ -45,10 +45,10 @@ export default function RegistrationScreen({ navigation }) {
                         <Text style={styles.bigText}>Up</Text>
                     </View>
                 </View>
-                <View style={{height: '70%', width:'100%', justifyContent:'start' ,alignItems:'center', paddingTop:0}}>
+                <View style={{height: '70%', width:'100%', justifyContent:'flex-start' ,alignItems:'center', paddingTop:0}}>
                     <LongInput label="Email" placeholder="example@mail.com" value={loginDetails.email} onChangeText={(email) => setLoginDetails({...loginDetails, email: email})} />
                     <LongInput label="Username" placeholder="johndoe" value={loginDetails.username} onChangeText={(username) => setLoginDetails({...loginDetails, username: username})} />
-                    <LongInput label="Password" placeholder="......."  value={loginDetails.username} onChangeText={(password) => setLoginDetails({...loginDetails, password: password})} password={true}/>
+                    <LongInput label="Password" placeholder="......."  value={loginDetails.password} onChangeText={(password) => setLoginDetails({...loginDetails, password: password})} password={true}/>
                     <LongInput label="Confirm Password" placeholder="......."  value={loginDetails.confirmPassword} onChangeText={(confirmPassword) => setLoginDetails({...loginDetails, confirmPassword: confirmPassword})} password={true}/>
                 
                 </View>

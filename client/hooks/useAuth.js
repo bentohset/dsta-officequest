@@ -5,8 +5,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null)
-    const [jwtToken, setJwtToken] = useState(null)
+    const [user, setUser] = useState('')
+    const [jwtToken, setJwtToken] = useState('')
 
     async function loginUser ({ email, password }) {
         try {
@@ -22,7 +22,7 @@ export const AuthProvider = ({children}) => {
             }
         } catch (error) {
             console.log(error)
-            setUser(null)
+            setUser('')
         }
         
     }
@@ -40,15 +40,18 @@ export const AuthProvider = ({children}) => {
             }
         } catch (error) {
             console.log(error)
-            setUser(null)
+            setUser('')
+            setJwtToken('')
         }
     }
 
     async function logoutUser () {
         // clear states
+        console.log('useauth')
         await AsyncStorage.removeItem('user')
-        setJwtToken(null)
-        setUser(null)
+        setUser('')
+        setJwtToken('')
+        console.log('finished logging out')
     }
 
     const getAuth = async () => {
@@ -60,7 +63,8 @@ export const AuthProvider = ({children}) => {
             }
         } catch (error) {
             console.log(error)
-            setUser(null)
+            setUser('')
+            setJwtToken('')
         }
     }
     useEffect(()=> {

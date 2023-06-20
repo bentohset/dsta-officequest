@@ -22,6 +22,10 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     },
+    prizeClaimed: {
+        type: Array,
+        default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    },
 });
 
 module.exports = User = mongoose.model('users', UserSchema);

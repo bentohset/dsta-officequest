@@ -25,10 +25,10 @@ const ViewPalModal = ({ visible, closeModal, highlightedPal }) => {
                             <View style={{alignItems:'center', justifyContent:'center'}}>
                                 <Text style={{fontWeight: 600, fontSize: 30, marginBottom:20}}>???</Text>
                                 <Image 
-                                style={{width: 45, height: 45}}
-                                source={highlightedPal.lockedImage}
-                                resizeMode={'contain'}
-                                opacity={0.3}
+                                    style={{width: 45, height: 45}}
+                                    source={highlightedPal.lockedImage}
+                                    resizeMode={'contain'}
+                                    opacity={0.3}
                                 />
                                 <Text style={{fontSize: 15, marginTop:10, marginBottom:10}}>?</Text>
                             </View>
@@ -98,10 +98,6 @@ const styles = StyleSheet.create({
     textStyle: {
         color: 'black',
         fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    modalText: {
-        marginBottom: 15,
         textAlign: 'center',
     },
 });
