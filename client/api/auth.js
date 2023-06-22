@@ -2,7 +2,8 @@ import Constants from "expo-constants";
 
 const { manifest } = Constants;
 
-const uri = `http://${manifest.debuggerHost.split(':').shift()}:3001`;
+
+const uri = `http://10.50.192.241:3001`;
 // do this to tunnel physical device to localhost server
 
 export const signIn = async (email, password) => {

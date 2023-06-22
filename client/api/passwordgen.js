@@ -2,7 +2,7 @@ import Constants from 'expo-constants';
 
 const { manifest } = Constants;
 
-const uri = `http://${manifest.debuggerHost.split(':').shift()}:3001`;
+const uri = `http://10.50.192.241:3001`;
 
 export const validatePassword = async (questId, password, userId) => {
     console.log(questId)
