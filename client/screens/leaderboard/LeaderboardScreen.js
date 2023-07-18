@@ -31,7 +31,7 @@ export default function LeaderboardScreen({ navigation }) {
     // Each Individual Level Component
     const Item = ({total, name, level, backgroundColor}) => (
         <View style={{width:'100%', height:55, alignItems:'center', flexDirection:'row'}}>
-            <View style={{width:'20', alignItems:'center'}}>
+            <View style={{width:20, alignItems:'center'}}>
                 <Text style={{fontSize:15, fontWeight:800}}>
                     {level + 1}
                 </Text>
